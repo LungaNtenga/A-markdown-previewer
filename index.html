@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Markdown Previewer by Lunga</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        #editor, #preview {
+            min-height: 300px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center text-white bg-success">
+                <h1>Markdown Previewer by Lunga</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 bg-light p-3">
+                <h2>Editor</h2>
+                <textarea id="editor" class="form-control" onkeyup="updatePreview()"></textarea>
+            </div>
+            <div class="col-md-6 bg-light p-3">
+                <h2>Preview</h2>
+                <div id="preview" class="border p-3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js"></script>
+    <script>
+        function updatePreview() {
+            let previewElement = document.getElementById("preview");
+            let editorValue = document.getElementById("editor").value;
+            let markedUpHTML = marked.parse(editorValue);
+            previewElement.innerHTML = markedUpHTML;
+        }
+
+        function setDefault() {
+            let defaultText = `# Welcome to my Markdown Previewer
+
+## This is a sub-header
+
+[Visit my GitHub](https://github.com/LungaNtenga)
+
+Here's some inline code: \`<div></div>\`
+
+\`\`\`
+// This is a code block
+function exampleFunction() {
+  return "Hello, World!";
+}
+\`\`\`
+
+- This 
+-is
+-a 
+-list
+-item
+
+> This is a blockquote
+
+[![Coding is fun!](https://img.youtube.com/vi/HggHXFnPOY4/0.jpg)
+
+**This is bolded text**
+`;
+
+            let editorField = document.getElementById("editor");
+            editorField.value = defaultText.trim();
+            updatePreview();
+        }
+
+        window.onload = setDefault;
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
